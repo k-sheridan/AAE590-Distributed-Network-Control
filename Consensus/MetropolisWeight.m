@@ -28,7 +28,7 @@ A = zeros(4);
 % Calculate the metropolis weights
 for row = (1:4)
     for col = (1:4)
-        if row ~= col
+        if row ~= col && adj(row, col)
             A(row, col) = 1 / max(neighoborCount(row), neighoborCount(col));
         end
     end
@@ -45,7 +45,7 @@ speed = 2; % m/s
 
 % set dt
 dt = 1;
-tf = 10;
+tf = 15;
 
 % state array (stores the states over time for plotting)
 X = {x};
