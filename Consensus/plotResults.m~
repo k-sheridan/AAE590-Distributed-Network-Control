@@ -1,0 +1,37 @@
+function [] = plotResults(X, dt)
+%This expects a cell array of cell array states.
+
+% first create state vector matrices
+x1 = [];
+x2 = [];
+x3 = [];
+x4 = [];
+
+t = (0:dt:dt*(length(X)-1));
+
+for idx = (1:length(X))
+    x1(1:3, idx) = X{idx}{1};
+    x2(1:3, idx) = X{idx}{2};
+    x3(1:3, idx) = X{idx}{3};
+    x4(1:3, idx) = X{idx}{4};
+end
+
+figure('Name', 'Bearings Over Time')
+hold on
+plot(t, x1(3, :), 'r-')
+plot(t, x2(3, :), 'g--')
+plot(t, x3(3, :), 'bs-')
+plot(t, x4(3, :), 'ko-')
+legend('x1', 'x2', 'x3', 'x4')
+title('Bearings Over Time')
+xlabel('Time (s)')
+ylabel('Bearing (rad)')
+ylim([-pi/2, pi/2])
+grid on
+
+
+figure('Name', 'Node Trajectories')
+hold on
+scale = 0.0
+quiver(x1(1, :), x1(2, :), scale*cos(x1(3, :)), scale*sin(x1(3, :)))
+
